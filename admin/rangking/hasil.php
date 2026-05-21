@@ -49,11 +49,17 @@
                         <td style="text-align:center;"><?php echo "A".$no.' ('.$row_penerima['nama_penerima'].') '; ?></td>
                         <?php
                         $q_kri = mysqli_query($koneksi, "SELECT * FROM kriteria where idtahun = '".$_GET['tahun']."';");
+                        
                         while ($rowkri = mysqli_fetch_array($q_kri)) {
-
-                            $q_nilai = mysqli_query($koneksi, "SELECT b.nilai FROM alter_detil a, nilaikriteria b WHERE a.idkriteria = '".$rowkri['idkriteria']."' AND a.id_penerima = '".$row_penerima['idpenerima']."' AND a.kdnilai = b.kdnilai");
-                            $nilai = mysqli_fetch_array($q_nilai)['nilai'];
-
+                            $nilai_kri = mysqli_query($koneksi, "SELECT * FROM nilaikriteria WHERE idkriteria = '".$rowkri['idkriteria']."';");
+								if (mysqli_num_rows($nilai_kri)==0) {
+                                    $q_nilai = mysqli_query($koneksi, "SELECT kdnilai FROM alter_detil ad where id_penerima = '".$row_penerima['idpenerima']."' and idkriteria = '".$rowkri['idkriteria']."' and kd_alternatif = (select DISTINCT (d.kd_alternatif) from alter_detil d join alter_head h on d.kd_alternatif = h.kd_alternatif where idtahun = '".$_GET['tahun']."' and id_penerima = '".$row_penerima['idpenerima']."')");
+                                    $nilai = mysqli_fetch_array($q_nilai)['kdnilai'];
+                                }
+                                else{
+                                    $q_nilai = mysqli_query($koneksi, "SELECT b.nilai FROM alter_detil a, nilaikriteria b WHERE a.idkriteria = '".$rowkri['idkriteria']."' AND a.id_penerima = '".$row_penerima['idpenerima']."' AND a.kdnilai = b.kdnilai");
+                                    $nilai = mysqli_fetch_array($q_nilai)['nilai'];
+                                }
                             ?>
                         <td style="text-align:center;"><?php echo $nilai; ?></td>
                             <?php
@@ -104,9 +110,19 @@
 
                     $cost_benefit = $rowkri['atribut'];
 
-                    $q_nilai = mysqli_query($koneksi, "SELECT b.nilai FROM alter_detil a, nilaikriteria b 
-                        WHERE a.idkriteria = '".$rowkri['idkriteria']."' AND a.id_penerima = '".$row_penerima['idpenerima']."' AND a.kdnilai = b.kdnilai");
-                    $nilai = mysqli_fetch_array($q_nilai)['nilai'];
+                    // $q_nilai = mysqli_query($koneksi, "SELECT b.nilai FROM alter_detil a, nilaikriteria b 
+                    //     WHERE a.idkriteria = '".$rowkri['idkriteria']."' AND a.id_penerima = '".$row_penerima['idpenerima']."' AND a.kdnilai = b.kdnilai");
+                    // $nilai = mysqli_fetch_array($q_nilai)['kdnilai'];
+
+                    $nilai_kri = mysqli_query($koneksi, "SELECT * FROM nilaikriteria WHERE idkriteria = '".$rowkri['idkriteria']."';");
+                    if (mysqli_num_rows($nilai_kri)==0) {
+                        $q_nilai = mysqli_query($koneksi, "SELECT kdnilai FROM alter_detil ad where id_penerima = '".$row_penerima['idpenerima']."' and idkriteria = '".$rowkri['idkriteria']."' and kd_alternatif = (select DISTINCT (d.kd_alternatif) from alter_detil d join alter_head h on d.kd_alternatif = h.kd_alternatif where idtahun = '".$_GET['tahun']."' and id_penerima = '".$row_penerima['idpenerima']."')");
+                        $nilai = mysqli_fetch_array($q_nilai)['kdnilai'];
+                    }
+                    else{
+                        $q_nilai = mysqli_query($koneksi, "SELECT b.nilai FROM alter_detil a, nilaikriteria b WHERE a.idkriteria = '".$rowkri['idkriteria']."' AND a.id_penerima = '".$row_penerima['idpenerima']."' AND a.kdnilai = b.kdnilai");
+                        $nilai = mysqli_fetch_array($q_nilai)['nilai'];
+                    }
 
                     if($cost_benefit == "Benefit"){
                         $q_nilai_max = mysqli_query($koneksi, "SELECT max(b.nilai) as maksimal FROM alter_detil a, nilaikriteria b 

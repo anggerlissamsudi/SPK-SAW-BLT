@@ -80,26 +80,42 @@
 
 <?php
 if (isset ($_POST['Simpan'])){
-    
-        $sql_simpan = "INSERT INTO bobot (idtahun, idkriteria, bobot) VALUES (
-            '".$_POST['idtahun']."',
-            '".$_POST['idkriteria']."',
-            '".$_POST['bobot']."')";
-        $query_simpan = mysqli_query($koneksi, $sql_simpan);
-        mysqli_close($koneksi);
 
-    if ($query_simpan) {
-      echo "<script>
-      Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
-      }).then((result) => {if (result.value){
-          window.location = 'index.php?page=bkriteria';
-          }
-      })</script>";
-      }else{
-      echo "<script>
-      Swal.fire({title: 'Tambah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
-      }).then((result) => {if (result.value){
-          window.location = 'index.php?page=bkriteria';
-          }
-      })</script>";
-    }}
+        $query = mysqli_query($koneksi, "SELECT SUM(bobot) AS total FROM bobot where idtahun = '".$_POST['idtahun']."';");
+        $row = mysqli_fetch_array($query);
+
+        if($row['total'] + $_POST['bobot'] > 100){
+
+            echo "<script>
+            Swal.fire({title: 'Bobot lebih dari 100',text: '',icon: 'error',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value){
+                window.location = 'index.php?page=bkriteria';
+                }
+            })</script>";
+
+        }else{
+
+            $sql_simpan = "INSERT INTO bobot (idtahun, idkriteria, bobot) VALUES (
+                '".$_POST['idtahun']."',
+                '".$_POST['idkriteria']."',
+                '".$_POST['bobot']."')";
+            $query_simpan = mysqli_query($koneksi, $sql_simpan);
+            mysqli_close($koneksi);
+    
+            if ($query_simpan) {
+            echo "<script>
+            Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value){
+                window.location = 'index.php?page=bkriteria';
+                }
+            })</script>";
+            }else{
+            echo "<script>
+            Swal.fire({title: 'Tambah Data Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value){
+                window.location = 'index.php?page=bkriteria';
+                }
+            })</script>";
+            }
+        }    
+}

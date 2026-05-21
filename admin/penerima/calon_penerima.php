@@ -6,18 +6,10 @@
 	<!-- /.card-header -->
 	<div class="card-body">
 		<div class="table-responsive">
-
-			<table id="tampil">
-				<tr>
-					<td><a href="?page=add-penerima" class="btn btn-primary"><i class="fa fa-edit"></i> Tambah Data</a></td>
-					<td>
-					Pilih File:
-					<input name="filepegawai" type="file" required="required"> 
-					<input name="upload" type="submit" value="Import" class="btn btn-primary">
-					</td>
-				</tr>
-			</table>
-			
+			<div>
+				<a href="?page=add-penerima" class="btn btn-primary">
+					<i class="fa fa-edit"></i> Tambah Data</a>
+			</div>
 			<br>
 			<table id="example1" class="table table-warning table-hover">
 				<thead>

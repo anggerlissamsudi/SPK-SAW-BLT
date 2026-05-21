@@ -9,7 +9,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tahun Kriteria</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="nama_tahun" name="nama_tahun" placeholder="Nama Tahun Contoh: 2020" required>
+                    <input type="text" class="form-control" id="nama_tahun" name="nama_tahun" placeholder="2020" required>
                 </div>
             </div>
 

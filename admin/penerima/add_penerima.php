@@ -8,16 +8,16 @@
 		<div class="card-body">
 
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">No Calon Penerima</label>
+				<label class="col-sm-2 col-form-label">NIK Calon Penerima</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="id_penerima" name="id_penerima" placeholder="No Calon Penerima" required>
+					<input type="text" class="form-control" id="id_penerima" name="id_penerima" placeholder="3516170610000001" required>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="nama_penerima" name="nama_penerima" placeholder="Nama Penerima" required>
+					<input type="text" class="form-control" id="nama_penerima" name="nama_penerima" placeholder="Djoko S" required>
 				</div>
 			</div>
 

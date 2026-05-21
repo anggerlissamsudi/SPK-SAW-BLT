@@ -36,7 +36,7 @@
 		</select>
 		</td>
 		<td>
-		<a href="lap_pertahun.php" target="_blank" class="btn btn-light"><i class="fa fa-file-pdf-o"></i> &nbsp PRINT</a>
+		
 		</td>
 	</tr>
 </table>
