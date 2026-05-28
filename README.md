@@ -26,9 +26,3 @@ Sistem ini melakukan pemrosesan data melalui 3 tahapan utama metode SAW secara m
 - **Client-Side:** JavaScript, jQuery (AJAX & DOM Manipulation), Bootstrap
 - **Database:** MySQL (Relational Data Modeling)
 
-## 💻 Cara Instalasi Lokal
-
-1. **Clone Repositori**
-```bash
-   git clone [https://github.com/anggerlissamsudi/SPK-SAW-BLT.git](https://github.com/anggerlissamsudi/SPK-SAW-BLT.git)
-   cd SPK-SAW-BLT
